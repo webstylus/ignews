@@ -14,3 +14,13 @@ Bibliotecas implementadas no projeto
 
 Figma do projeto [ig.news](https://www.figma.com/file/mW8AfUKeRwXwLAAxLOOC22/ig.news?node-id=1%3A2)
  
+Instalação
+
+```bash
+ 
+$ yarn install ou npm run install
+$ yarn dev ou npm run dev
+
+ - abra seu navegador em http://localhost:3000
+ 
+ ```
