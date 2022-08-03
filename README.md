@@ -9,7 +9,7 @@ Bibliotecas implementadas no projeto
 * [sass]()
 * [react-icons]()
 * [prettier]()
-* [typescript]()
+* [faunadb](https://fauna.com/)
 
 
 Figma do projeto [ig.news](https://www.figma.com/file/mW8AfUKeRwXwLAAxLOOC22/ig.news?node-id=1%3A2)
