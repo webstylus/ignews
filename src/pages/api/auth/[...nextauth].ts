@@ -9,11 +9,44 @@ export default NextAuth({
       clientId: process.env.GITHUB_ID,
       clientSecret: process.env.GITHUB_SECRET
       // authorization: {
-      //   params: { scope: 'read:user', redirect_uri: process.env.GITHUB_REDIRECT_URI }
+      //   params: { request_uri: process.env.GITHUB_REDIRECT_URI }
       // }
     })
   ],
   callbacks: {
+    async session({ session }) {
+      try {
+        const userActiveSubscription = await fauna.query(
+            q.Get(
+                q.Intersection([
+                  q.Match(
+                      q.Index('subscription_by_user_ref'),
+                      q.Select(
+                          'ref',
+                          q.Get(
+                              q.Match(
+                                  q.Index('user_by_email'),
+                                  q.Casefold(session.user.email)
+                              )
+                          )
+                      )
+                  ),
+                  q.Match(q.Index('subscription_by_status'), 'active')
+                ])
+            )
+        )
+
+        return {
+          ...session,
+          activeSubscription: userActiveSubscription
+        }
+      } catch (e) {
+        return {
+          ...session,
+          activeSubscription: null
+        }
+      }
+    },
     async signIn({ user, account, profile }) {
       const { email } = user
       try {
