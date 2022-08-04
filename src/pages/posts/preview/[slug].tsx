@@ -1,5 +1,5 @@
 import styles from '../post.module.scss'
-import { GetStaticProps } from 'next'
+import {GetStaticPaths, GetStaticProps} from 'next'
 import { getPrismicClient } from '../../../services/prismic'
 import { asHTML, asText } from '@prismicio/helpers'
 import Head from 'next/head'
@@ -53,7 +53,7 @@ export default function Post({ post }: IPostPost) {
   )
 }
 
-export const getStaticPaths = () => {
+export const getStaticPaths: GetStaticPaths = async () => {
   return {
     paths: [],
     fallback: 'blocking'
